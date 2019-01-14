@@ -508,7 +508,7 @@ public class LadderLayoutManager extends RecyclerView.LayoutManager implements R
     }
 
     @Nullable
-    private View getTopView() {
+    public View getTopView() {
         int prevBottom = Integer.MAX_VALUE;
         View topView = null;
 
@@ -528,8 +528,8 @@ public class LadderLayoutManager extends RecyclerView.LayoutManager implements R
         return topView;
     }
 
-    private int getAnchorPosition() {
-        if (mScrollOffset != RecyclerView.NO_POSITION) {
+    public int getAnchorPosition() {
+        if (mScrollOffset != RecyclerView.HORIZONTAL) {
             return mScrollOffset;
         }
 
