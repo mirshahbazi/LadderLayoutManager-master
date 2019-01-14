@@ -3,6 +3,7 @@ package com.thunderpunch.lib.layoutmanager;
 import android.graphics.PointF;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
@@ -496,6 +497,51 @@ public class LadderLayoutManager extends RecyclerView.LayoutManager implements R
         @Override
         public void decorateChild(View child, float posOffsetPercent, float layoutPercent, boolean isBottom) {
             ViewCompat.setElevation(child, (float) (layoutPercent * mElevation * 0.7 + mElevation * 0.3));
+        }
+    }
+
+    /**
+     * @return first visible item position.
+     */
+    public int findFirstVisibleItemPosition() {
+        return getChildCount() != 0 ? getPosition(getChildAt(0)) : RecyclerView.NO_POSITION;
+    }
+
+    @Nullable
+    private View getTopView() {
+        int prevBottom = Integer.MAX_VALUE;
+        View topView = null;
+
+        for (int i = 0, cnt = getChildCount(); i < cnt; i++) {
+            final View child = getChildAt(i);
+            final int bottom = getDecoratedBottom(child);
+            if (bottom < 0) {
+                continue;
+            }
+
+            if (bottom < prevBottom) {
+                prevBottom = bottom;
+                topView = child;
+            }
+        }
+
+        return topView;
+    }
+
+    private int getAnchorPosition() {
+        if (mScrollOffset != RecyclerView.NO_POSITION) {
+            return mScrollOffset;
+        }
+
+        if (getChildCount() == 0) {
+            return 0;
+        } else {
+            final View topView = getTopView();
+            if (topView == null) {
+                return 0;
+            } else {
+                return getPosition(topView);
+            }
         }
     }
 }

@@ -47,6 +47,9 @@ public class HorizontalSampleActivity extends AppCompatActivity {
         adapter = new HSAdapter();
         rcv.setAdapter(adapter);
 
+
+
+
         final SeekBar sb = (SeekBar) findViewById(R.id.sb);
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
