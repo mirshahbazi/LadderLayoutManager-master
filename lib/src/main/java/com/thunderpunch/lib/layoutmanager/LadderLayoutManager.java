@@ -313,7 +313,7 @@ public class LadderLayoutManager extends RecyclerView.LayoutManager implements R
     }
 
     /**
-     * @return 当前位置与目标下标位视图的距离
+     * @return The distance between the current position and the target lower position view
      */
     public int calculateDistanceToPosition(int targetPos) {
         int pendingScrollOffset = mChildSize[mOrientation] * (convert2LayoutPosition(targetPos) + 1);
@@ -504,7 +504,7 @@ public class LadderLayoutManager extends RecyclerView.LayoutManager implements R
      * @return first visible item position.
      */
     public int findFirstVisibleItemPosition() {
-        return getChildCount() != 0 ? getPosition(getChildAt(0)) : RecyclerView.HORIZONTAL;
+        return mChildCount != 0 ? -calculateDistanceToPosition(getPosition(getChildAt(0))) : HORIZONTAL;
     }
 
     @Nullable
