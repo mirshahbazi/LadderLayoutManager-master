@@ -504,7 +504,7 @@ public class LadderLayoutManager extends RecyclerView.LayoutManager implements R
      * @return first visible item position.
      */
     public int findFirstVisibleItemPosition() {
-        return mChildCount != 0 ? -calculateDistanceToPosition(getPosition(getChildAt(0))) : HORIZONTAL;
+        return mChildCount != 0 ? -calculateDistanceToPosition(getPosition(getChildAt(0))) : HORIZONTAL;//change by mam
     }
 
     @Nullable
